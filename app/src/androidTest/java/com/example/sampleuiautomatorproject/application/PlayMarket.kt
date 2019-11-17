@@ -33,7 +33,7 @@ class PlayMarket : AbstractApplication("com.android.vending") {
             "Приложение не было установлено",
             openInstalledAppButton
                 .waitFindObject()
-                .waitIsClickable(true, 20.secondsToMillis())
+                .waitIsClickable(true, 120.secondsToMillis())
         )
     }
 
