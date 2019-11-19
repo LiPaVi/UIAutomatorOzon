@@ -6,7 +6,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class InstallOzonTest: AbstractApplicationTest<PlayMarket>(PlayMarket()) {
+class InstallOzonTest : AbstractApplicationTest<PlayMarket>(PlayMarket()) {
     @Test
     fun installOzon() = with(app) {
         open()
