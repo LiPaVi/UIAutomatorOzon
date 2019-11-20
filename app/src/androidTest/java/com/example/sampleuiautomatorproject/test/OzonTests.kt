@@ -1,10 +1,7 @@
 package com.example.sampleuiautomatorproject.test
 
 import com.example.sampleuiautomatorproject.application.Ozon
-import com.example.sampleuiautomatorproject.ozonPages.FavouritesPage
-import com.example.sampleuiautomatorproject.ozonPages.MainPage
-import com.example.sampleuiautomatorproject.ozonPages.ProductPage
-import com.example.sampleuiautomatorproject.ozonPages.SearchPage
+import com.example.sampleuiautomatorproject.ozonPages.*
 import org.junit.Before
 import org.junit.Test
 
@@ -14,10 +11,13 @@ class OzonTests : AbstractApplicationTest<Ozon>(Ozon()) {
     private lateinit var searchPage: SearchPage
     private lateinit var productPage: ProductPage
     private lateinit var favouritesPage: FavouritesPage
+    private lateinit var registrationPage: RegistrationPage
 
     private val testBookName = "Философия Java"
     private val testSearch = "философия java"
     private val testPrice = "1 499 \u20BD"
+    private val validLogin = "qwe@r.ty"
+    private val invalidLogin = "qwe"
 
     @Before
     fun prepare() {
@@ -26,6 +26,7 @@ class OzonTests : AbstractApplicationTest<Ozon>(Ozon()) {
         searchPage = SearchPage()
         productPage = ProductPage()
         favouritesPage = FavouritesPage()
+        registrationPage = RegistrationPage()
     }
 
     @Test
@@ -46,5 +47,17 @@ class OzonTests : AbstractApplicationTest<Ozon>(Ozon()) {
         productPage.clickFavourites()
         favouritesPage.checkTitle()
         favouritesPage.findProductInFavourites(testBookName)
+    }
+
+    @Test
+    fun mailValidationTest() = with(app) {
+        mainPage.clickCabinet()
+        registrationPage.clickLoginByMail()
+        registrationPage.enterLogin(invalidLogin)
+        registrationPage.clickLoginButton()
+        registrationPage.checkIsEmailError()
+        registrationPage.enterLogin(validLogin)
+        registrationPage.clickLoginButton()
+        registrationPage.checkNoEmailError()
     }
 }
