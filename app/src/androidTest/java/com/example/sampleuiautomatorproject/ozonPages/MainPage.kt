@@ -12,7 +12,7 @@ class MainPage {
         searchSelector.waitFindObject().click()
     }
 
-    fun clickCabinet() {
+    fun gotoCabinet() {
         // если не дождаться прогрузки элементов экрана, откроется другой экран регистрации оО
         searchSelector.waitFindObject()
         cabinet.waitFindObject().click()

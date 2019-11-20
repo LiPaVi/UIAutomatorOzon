@@ -41,17 +41,16 @@ class OzonTests : AbstractApplicationTest<Ozon>(Ozon()) {
     fun chooseFavouriteTest() = with(app) {
         mainPage.clickSearch()
         searchPage.typeToSearch(testSearch)
-        searchPage.checkHintProductName(testBookName)
         searchPage.clickHint(testBookName)
-        productPage.clickToFavourites()
-        productPage.clickFavourites()
+        productPage.clickHeart()
+        productPage.gotoFavourites()
         favouritesPage.checkTitle()
         favouritesPage.findProductInFavourites(testBookName)
     }
 
     @Test
     fun mailValidationTest() = with(app) {
-        mainPage.clickCabinet()
+        mainPage.gotoCabinet()
         registrationPage.clickLoginByMail()
         registrationPage.enterLogin(invalidLogin)
         registrationPage.clickLoginButton()
@@ -59,5 +58,15 @@ class OzonTests : AbstractApplicationTest<Ozon>(Ozon()) {
         registrationPage.enterLogin(validLogin)
         registrationPage.clickLoginButton()
         registrationPage.checkNoEmailError()
+    }
+
+    @Test
+    fun feedbackWithoutLogin() = with(app) {
+        mainPage.clickSearch()
+        searchPage.typeToSearch(testSearch)
+        searchPage.clickHint(testBookName)
+        productPage.scrollToFeedback()
+        productPage.clickFeedbackButton()
+        registrationPage.checkTitle()
     }
 }
